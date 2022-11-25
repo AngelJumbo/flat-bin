@@ -3,6 +3,13 @@ Script that generates launchers for flatpaks in a bin folder, so they can be use
 
 ## Installation
 
+```
+git clone https://github.com/AngelJumbo/flat-bin
+cd flat-bin
+sudo cp ./flat-bin /usr/local/bin/flat-bin
+
+```
+
 ## Usage
 By default the script generates the launchers in $HOME/.local/bin/ so that folder should be part of your PATH.
 
