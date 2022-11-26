@@ -7,12 +7,12 @@ IFS=$'\n'
 for app in $(flatpak list --app)
 do
   appname="$(echo "$app" | awk '{print $1}')-Flatpak"
-  applauchname=$(echo "$app" | awk '{print $2}')
+  applaunchname=$(echo "$app" | awk '{print $2}')
   appdir="$binfolder$appname"
   touch "$appdir"
   echo "#!/bin/sh
 
-  flatpak run $applauchname
+  flatpak run $applaunchname
 
   " > "$appdir"
   chmod +x "$appdir"
