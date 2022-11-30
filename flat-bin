@@ -2,9 +2,9 @@
 
 binfolder=$HOME/.local/bin/
 
-IFS=$'\n'
+# IFS=$'\n'
 
-for app in $(flatpak list --app)
+flatpak list --app | while read -r app
 do
   appname="$(echo "$app" | awk '{print $1}')-Flatpak"
   applaunchname=$(echo "$app" | awk '{print $2}')
@@ -12,9 +12,11 @@ do
   touch "$appdir"
   echo "#!/bin/sh
 
-  flatpak run $applaunchname
+flatpak run $applaunchname
 
   " > "$appdir"
+  echo "$appdir"
+  # echo "$appname   $applaunchname"
   chmod +x "$appdir"
 done
 
