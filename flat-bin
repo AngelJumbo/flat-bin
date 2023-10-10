@@ -3,25 +3,21 @@
 binfolder=$HOME/.local/bin/
 
 # IFS=$'\n'
-rm $binfolder/*-Flatpak
 
-flatpak --columns=app list --app | while read -r app
+flatpak list --app | while read -r app
 do
-  lastIndx=$(echo "$app" | awk -F. '{ print NF - 1 }')
-  lastIndx=$((lastIndx+1))
-  printIndx="{print \$$lastIndx}" 
-  appname="$(echo "$app" | awk -F  '.' "$printIndx")-Flatpak"
-  # applaunchname=$(echo "$app" | awk '{print $2}')
+  appname="$(echo "$app" | awk -F '\t' '{print $1}')-Flatpak"
+  applaunchname=$(echo "$app" | awk -F '\t' '{print $2}')
   appdir="$binfolder$appname"
+  echo "$applaunchname"
   touch "$appdir"
   echo "#!/bin/sh
 
-flatpak run $app
+flatpak run $applaunchname
 
   " > "$appdir"
-  # echo "$appdir"
-  # echo "$lastIndx"
-  echo "$appname   $app"
+  echo "$appdir"
+  # echo "$appname   $applaunchname"
   chmod +x "$appdir"
 done
 
