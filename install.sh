@@ -2,18 +2,16 @@
 
 echo "Installing flat-bin..."
 
-BIN_DIR="/usr/local/bin"
+BIN_DIR="$HOME/.local/bin"
+
+mkdir -p "$BIN_DIR"
 
 echo "Downloading flat-bin..."
-sudo curl -L https://github.com/AngelJumbo/flat-bin/releases/latest/download/flat-bin -o "$BIN_DIR/flat-bin"
+curl -L https://github.com/AngelJumbo/flat-bin/releases/latest/download/flat-bin -o "$BIN_DIR/flat-bin"
 
-echo "Setting permissions..."
-sudo chmod +x "$BIN_DIR/flat-bin"
+chmod +x "$BIN_DIR/flat-bin"
 
-if command -v flat-bin &>/dev/null; then
-  echo "flat-bin installed successfully!"
-else
-  echo "Error: flat-bin installation failed."
-  exit 1
-fi
+echo "Installation complete."
+echo "Make sure that ~/.local/bin is part of your PATH to use flat-bin."
+echo "You can check this by running: export PATH=\$HOME/.local/bin:\$PATH"
 
